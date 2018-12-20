@@ -1,0 +1,57 @@
+@startuml
+scale 1.1
+
+skinparam {
+backgroundColor #DCDCDC
+classBackgroundColor white
+classbordercolor black
+
+arrowColor #A80036
+
+classFontSize 14
+classFontStyle bold
+classFontName Arial
+classAttributeFontSize 16
+classAttributeFontName calibri
+}
+
+hide methods
+
+class User {
+    id : Long
+    username : String
+    password : String
+    active : Boolean
+    roles : Set<Role>
+    requests : Set<Request>
+}
+
+class Request {
+    id : Long
+    text : String
+    ptype : String
+    author : User
+    filename : String
+    checks : Set<Checks>
+    message : String
+}
+
+enum Role {
+    USER             
+    ADMIN
+    VERIF
+}
+
+enum Checks {
+    CHECK                  
+    VERIFIED
+    PAID
+}
+
+
+User " 1   " --> " 0..* " Request
+User " 1 " o-> "      1..3" Role
+Request " 1 " o-> "      0..3" Checks
+
+
+@enduml

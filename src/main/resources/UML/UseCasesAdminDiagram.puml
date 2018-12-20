@@ -1,0 +1,59 @@
+@startuml
+
+scale 1.1
+left to right direction
+
+skinparam {
+backgroundColor #DCDCDC
+
+usecaseBackgroundColor white
+usecasebordercolor black
+usecaseFontName calibri
+usecaseFontSize 14
+
+ActorBackgroundColor white
+ActorBordercolor #990434
+actorFontSize 16
+actorFontStyle bold
+
+arrowColor #A80036
+arrowFontSize 14
+}
+
+
+actor Admin
+usecase "Авторизация" as login
+usecase "Удалить Клиента\n из базы" as delete
+usecase "Изменить логин\n пользователя" as edit
+usecase "Назначить пользователя\n Админом или Верификатором" as update
+usecase "Прием заявки на\n получение патента" as apply
+usecase "Проверка заявки на\n корректность данных" as check
+usecase "Уведомление пользоателя о\n процессе получения патента" as message
+usecase "Проверка оплаты\n патента" as pay
+usecase "Произвести поиск\n по заявкам" as search
+usecase "Изменить свой\n логин и пароль" as profile
+
+
+Admin --> login
+login --> apply
+login --> delete
+login --> profile
+login --> search
+login --> edit
+
+apply --> check
+apply --> message
+apply --> pay
+
+edit --> update
+
+
+
+'passport <. apply  : "<<include>>           "
+'apply ..> check : <<include>>
+'check <. disc : "                       <<extend>>"
+'apply ..> addC : <<include>>
+'apply ..> new : <<include>>
+'apply ..> upd : <<include>>
+
+@enduml

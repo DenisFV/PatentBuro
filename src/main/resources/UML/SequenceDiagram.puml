@@ -1,0 +1,81 @@
+@startuml
+scale 1.1
+
+skinparam {
+backgroundColor white\#EEEDDD
+
+ParticipantPadding 0
+
+ActorBackgroundColor white
+ActorBordercolor #990434
+actorFontSize 16
+actorFontStyle bold
+
+ParticipantBorderColor black
+ParticipantBackgroundColor burlywood
+ParticipantFontColor black
+
+sequenceLifeLineBorderColor blue
+sequenceLifeLineBackgroundColor motivation
+
+sequenceGroupBackgroundColor #f75656
+
+arrowColor #A80036
+arrowFontSize 14
+
+noteBackgroundColor #efee92
+notebordercolor black
+}
+
+
+actor "Клиент" as client order 1
+participant ":Патентного Бюро" as system order 2
+
+client -> system : Подать заявку
+activate system
+    system -> system : Проверить корректность данных
+    activate system
+    deactivate system
+
+alt Заявка корректна подана
+    create participant ":Заявка Клиента" as application order 3
+    system -> application : Пометить заявку как "Проверена"
+    system --> client : Подтверждение
+
+else Заявка не корректно подана
+    system -> application : Сообщить Клиенту об ошибках
+    system --> client : Отказ
+end
+
+alt Заявка - не прошла\n верификацию
+    system -> application : Сообщить Клиенту об ошибках
+    activate application
+    deactivate application
+else Заявка - прошла верификацию
+    system -> application : Пометить заявку как "Верифицированна"
+    activate application
+    deactivate application
+    system --> client : Цена заявки
+'    create participant ":Журнал Верификации" as verifier order 4
+'    system -> verifier : Переместить заявку в журнал
+'    deactivate system
+end
+
+client -> system : Оплатить
+
+alt Оплата прошла\n успешно
+    system -> system : Подтвердить оплату
+    activate system
+    system --> client : Подтверждение
+    system --> client : Выдача патента
+
+    deactivate system
+else Оплата не прошла
+     system --> client : Отказ
+     note right of client
+         Предлагается
+         повторить оплату
+     end note
+end
+
+@enduml

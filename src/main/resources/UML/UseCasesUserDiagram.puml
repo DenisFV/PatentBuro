@@ -1,0 +1,46 @@
+@startuml
+scale 1.1
+left to right direction
+
+skinparam {
+backgroundColor #DCDCDC
+usecaseBackgroundColor white
+
+usecasebordercolor black
+usecaseFontName calibri
+usecaseFontSize 14
+
+ActorBackgroundColor white
+ActorBordercolor #990434
+actorFontSize 16
+actorFontStyle bold
+
+arrowColor #A80036
+arrowFontSize 14
+}
+
+
+actor User
+
+usecase "Авторизация" as login
+usecase "Произвести поиск по\n своим заявкам" as search
+usecase "Подать заявку на\n получение патента" as apply
+usecase "Изменить логин и пароль" as profile
+usecase "Изменить содержание заявки" as edit
+usecase "Отслеживать прогресс\n получения патента" as monitor
+usecase "Оплатить патент" as pay
+
+
+
+
+User --> login
+
+login --> apply
+login --> search
+login --> profile
+apply --> monitor
+apply --> edit
+monitor --> pay
+
+
+@enduml

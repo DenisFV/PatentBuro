@@ -1,0 +1,38 @@
+@startuml
+
+scale 1.1
+left to right direction
+
+skinparam {
+backgroundColor #DCDCDC
+
+usecaseBackgroundColor white
+usecasebordercolor black
+usecaseFontName calibri
+usecaseFontSize 14
+
+ActorBackgroundColor white
+ActorBordercolor #990434
+actorFontSize 16
+actorFontStyle bold
+
+arrowColor #A80036
+arrowFontSize 14
+}
+
+actor Verifier
+
+usecase "Авторизация" as login
+usecase "Произвести поиск\n по заявкам" as search
+usecase "Верификация\n изделия" as verif
+usecase "Уведомление пользоателя о\n результате верификации" as message
+usecase "Изменить свой\n логин и пароль" as profile
+
+
+Verifier --> login
+login --> search
+login --> verif
+login --> profile
+verif --> message
+
+@enduml

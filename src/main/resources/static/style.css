@@ -1,0 +1,22 @@
+body {
+    color: #000000 !important;
+    background: rgb(238, 234, 230) !important;
+}
+
+.btn-secondary {
+    color: #f8f8e7 !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    background-color: #a23237 !important;
+    *background-color: #57191e !important;
+    background-image: linear-gradient(to bottom, #a23237, #57191e);
+    border-color: #535353 !important;
+}
+
+.btn-secondary-info {
+    color: #f8f8e7 !important;
+    text-shadow: 0 -1px 0 rgba(0, 0, 0, 0.25) !important;
+    background-color: #466ba2 !important;
+    *background-color: #24324e !important;
+    /*background-image: linear-gradient(to bottom, #6917c8, #2a1454);*/
+    border-color: #535353 !important;
+}
